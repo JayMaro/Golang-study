@@ -34,6 +34,39 @@ func main() {
 	slice5 := append(slice4, 6, 7, 8, 9)
 	fmt.Println("slice5 = ", slice5, len(slice5), cap(slice5))
 
+	array2 := [...]int{1, 2, 3, 4, 5, 6, 7}
+	slicingSlice1 := array2[2:5] // 3, 4, 5 len: 3 cap: 5
+	fmt.Println("slicingSlice1 = ", slicingSlice1, len(slicingSlice1), cap(slicingSlice1))
+	slicingSlice2 := slicingSlice1[1:2] // 4 len: 1 cap: 4
+	fmt.Println("slicingSlice2 = ", slicingSlice2, len(slicingSlice2), cap(slicingSlice2))
+	slicingSlice3 := array2[2:5:5] // 3, 4, 5 len: 3 cap: 3
+	fmt.Println("slicingSlice3 = ", slicingSlice3, len(slicingSlice3), cap(slicingSlice3))
+
+	copySlice1 := []int{1, 2, 3, 4, 5, 6}
+	copySlice2 := append([]int{}, copySlice1...)
+	copySlice1[5] = 8
+	fmt.Println("copySlice1 = ", copySlice1, len(copySlice1), cap(copySlice1))
+	fmt.Println("copySlice2 = ", copySlice2, len(copySlice2), cap(copySlice2))
+
+	copySlice3 := make([]int, 3, 10)
+	copySlice4 := make([]int, 10, 10)
+	cnt3 := copy(copySlice3, copySlice1)
+	cnt4 := copy(copySlice4, copySlice1)
+	fmt.Println("copySlice3 = ", copySlice3, len(copySlice3), cap(copySlice3))
+	fmt.Println("cnt3 = ", cnt3)
+	fmt.Println("copySlice4 = ", copySlice4, len(copySlice4), cap(copySlice4))
+	fmt.Println("cnt4 = ", cnt4)
+
+	// slice 중간요소 삭제
+	removeSlice1 := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	resultSlice1 := append(removeSlice1[:5], removeSlice1[6:]...)
+	fmt.Println("resultSlice1 = ", resultSlice1, len(resultSlice1), cap(resultSlice1))
+
+	// slice 중간요소 추가
+	addSlice1 := append([]int{}, resultSlice1...)
+	addSlice1 = append(addSlice1[:5], append([]int{6}, addSlice1[5:]...)...)
+	fmt.Println("addSlice1 = ", addSlice1, len(addSlice1), cap(addSlice1))
+
 }
 
 func changeSliceNum(s []int) {
